@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apprendre CSS Moderne - Guide Complet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables CSS */
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--success);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--success);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            background: linear-gradient(rgba(67, 97, 238, 0.9), rgba(58, 12, 163, 0.9));
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #d9047c;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        /* Code Examples */
+        .code-examples {
+            background: #f8f9fa;
+        }
+
+        .code-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .code-example {
+            background: #2d3748;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .code-header {
+            background: #1a202c;
+            color: white;
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-title {
+            font-weight: 500;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--success);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .copy-btn:hover {
+            color: white;
+        }
+
+        .code-content {
+            padding: 1.5rem;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .code-comment {
+            color: #a0aec0;
+        }
+
+        .code-selector {
+            color: #81e6d9;
+        }
+
+        .code-property {
+            color: #fbb6ce;
+        }
+
+        .code-value {
+            color: #faf089;
+        }
+
+        /* Interactive Demos */
+        .demo-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .demo-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .demo-box {
+            width: 150px;
+            height: 150px;
+            margin: 1.5rem auto;
+            background: var(--primary);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .demo-controls {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .demo-btn {
+            background: var(--light);
+            border: 1px solid #dee2e6;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .demo-btn:hover {
+            background: #e9ecef;
+        }
+
+        .demo-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Flexbox Demo */
+        .flex-demo {
+            display: flex;
+            gap: 10px;
+            padding: 1rem;
+            background: #edf2f7;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .flex-item {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            flex: 1;
+            text-align: center;
+        }
+
+        /* Grid Demo */
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 1rem;
+            background: #edf2f7;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .grid-item {
+            background: var(--secondary);
+            color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        /* Animation Demo */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .animated-box {
+            animation: pulse 2s infinite;
+        }
+
+        /* Resources */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* API Demo Section */
+        .api-demo {
+            background: #f8f9fa;
+        }
+
+        .api-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .api-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .api-result {
+            background: #f8f9fa;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+            overflow: auto;
+        }
+
+        .api-loading {
+            display: none;
+            color: var(--primary);
+        }
+
+        /* Footer - CORRIGÉ */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--success);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--success);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+
+            nav {
+                width: 100%;
+                order: 3;
+                margin-top: 1rem;
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .features-grid,
+            .code-container,
+            .demo-container,
+            .resources-grid,
+            .api-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 2.5rem 0;
+            }
+
+            section {
+                padding: 2.5rem 0;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --light: #121212;
+                --dark: #f8f9fa;
+            }
+
+            body {
+                background-color: #121212;
+                color: #f8f9fa;
+            }
+
+            .feature-card,
+            .demo-card,
+            .resource-card,
+            .api-card {
+                background: #1e1e1e;
+                color: #f8f9fa;
+            }
+
+            .code-examples,
+            .api-demo {
+                background: #1a1a1a;
+            }
+            
+            footer {
+                background: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-code"></i>
+                    <span>CSS Moderne</span>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav>
+                    <ul>
+                        <li><a href="#features">Fonctionnalités</a></li>
+                        <li><a href="#examples">Exemples</a></li>
+                        <li><a href="#demos">Démos</a></li>
+                        <li><a href="#api">API CSS</a></li>
+                        <li><a href="#resources">Ressources</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Apprenez CSS Moderne</h1>
+                <p>Découvrez les dernières fonctionnalités de CSS avec des explications claires, des exemples pratiques et des démos interactives.</p>
+                <a href="#features" class="btn">Explorer CSS</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Fonctionnalités CSS Moderne</h2>
+                    <p>Découvrez les puissantes fonctionnalités qui ont révolutionné le développement web</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-th"></i>
+                        </div>
+                        <h3>CSS Grid</h3>
+                        <p>Système de mise en page bidimensionnel pour créer des designs complexes et responsives avec peu de code.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-boxes"></i>
+                        </div>
+                        <h3>Flexbox</h3>
+                        <p>Modèle de mise en page unidimensionnel pour aligner et distribuer l'espace entre les éléments.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Variables CSS</h3>
+                        <p>Créez des valeurs réutilisables pour maintenir la cohérence et faciliter les mises à jour.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <h3>Animations & Transitions</h3>
+                        <p>Animez vos interfaces sans JavaScript avec des transitions fluides et des keyframes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Media Queries</h3>
+                        <p>Adaptez vos designs à tous les appareils avec des points d'arrêt personnalisés.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <h3>Transformations 3D</h3>
+                        <p>Créez des effets visuels impressionnants avec les transformations et les perspectives 3D.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Examples Section -->
+        <section id="examples" class="code-examples">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Exemples de Code</h2>
+                    <p>Apprenez avec des exemples pratiques que vous pouvez tester immédiatement</p>
+                </div>
+                <div class="code-container">
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-title">Variables CSS</span>
+                            <button class="copy-btn">
+                                <i class="far fa-copy"></i>
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <span class="code-comment">/* Déclarer des variables globales */</span><br>
+                            <span class="code-selector">:root</span> {<br>
+                            &nbsp;&nbsp;<span class="code-property">--primary-color</span>: <span class="code-value">#4361ee</span>;<br>
+                            &nbsp;&nbsp;<span class="code-property">--spacing</span>: <span class="code-value">1rem</span>;<br>
+                            &nbsp;&nbsp;<span class="code-property">--border-radius</span>: <span class="code-value">8px</span>;<br>
+                            }<br><br>
+                            
+                            <span class="code-comment">/* Utiliser les variables */</span><br>
+                            <span class="code-selector">.button</span> {<br>
+                            &nbsp;&nbsp;<span class="code-property">background</span>: <span class="code-value">var(--primary-color)</span>;<br>
+                            &nbsp;&nbsp;<span class="code-property">padding</span>: <span class="code-value">var(--spacing)</span>;<br>
+                            &nbsp;&nbsp;<span class="code-property">border-radius</span>: <span class="code-value">var(--border-radius)</span>;<br>
+                            }
+                        </div>
+                    </div>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-title">CSS Grid</span>
+                            <button class="copy-btn">
+                                <i class="far fa-copy"></i>
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <span class="code-selector">.container</span> {<br>
+                            &nbsp;&nbsp;<span class="code-property">display</span>: <span class="code-value">grid</span>;<br>
+                            &nbsp;&nbsp;<span class="code-property">grid-template-columns</span>: <span class="code-value">repeat(auto-fit, minmax(250px, 1fr))</span>;<br>
+                            &nbsp;&nbsp;<span class="code-property">gap</span>: <span class="code-value">1rem</span>;<br>
+                            }<br><br>
+                            
+                            <span class="code-comment">/* Pour les écrans mobiles */</span><br>
+                            <span class="code-selector">@media (max-width: 768px)</span> {<br>
+                            &nbsp;&nbsp;<span class="code-selector">.container</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-property">grid-template-columns</span>: <span class="code-value">1fr</span>;<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                    </div>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-title">Flexbox</span>
+                            <button class="copy-btn">
+                                <i class="far fa-copy"></i>
+                            </button>
+                        </div>
+                        <div class="code-content">
+                            <span class="code-selector">.navbar</span> {<br>
+                            &nbsp;&nbsp;<span class="code-property">display</span>: <span class="code-value">flex</span>;<br>
+                            &nbsp;&nbsp;<span class="code-property">justify-content</span>: <span class="code-value">space-between</span>;<br>
+                            &nbsp;&nbsp;<span class="code-property">align-items</span>: <span class="code-value">center</span>;<br>
+                            &nbsp;&nbsp;<span class="code-property">padding</span>: <span class="code-value">1rem</span>;<br>
+                            }<br><br>
+                            
+                            <span class="code-selector">.logo</span> {<br>
+                            &nbsp;&nbsp;<span class="code-property">margin-right</span>: <span class="code-value">auto</span>;<br>
+                            }<br><br>
+                            
+                            <span class="code-selector">.nav-links</span> {<br>
+                            &nbsp;&nbsp;<span class="code-property">display</span>: <span class="code-value">flex</span>;<br>
+                            &nbsp;&nbsp;<span class="code-property">gap</span>: <span class="code-value">1.5rem</span>;<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Demos Section -->
+        <section id="demos">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Démos Interactives</h2>
+                    <p>Expérimentez avec les fonctionnalités CSS en temps réel</p>
+                </div>
+                <div class="demo-container">
+                    <div class="demo-card">
+                        <h3>Animation CSS</h3>
+                        <div class="demo-box animated-box">
+                            Animation
+                        </div>
+                        <p>Cette boîte utilise l'animation CSS avec @keyframes</p>
+                        <div class="demo-controls">
+                            <button class="demo-btn active" data-animation="pulse">Pulse</button>
+                            <button class="demo-btn" data-animation="rotate">Rotation</button>
+                            <button class="demo-btn" data-animation="bounce">Rebond</button>
+                        </div>
+                    </div>
+                    <div class="demo-card">
+                        <h3>Flexbox</h3>
+                        <div class="flex-demo">
+                            <div class="flex-item">1</div>
+                            <div class="flex-item">2</div>
+                            <div class="flex-item">3</div>
+                        </div>
+                        <p>Contrôlez la disposition des éléments avec Flexbox</p>
+                        <div class="demo-controls">
+                            <button class="demo-btn active" data-flex="row">Row</button>
+                            <button class="demo-btn" data-flex="column">Column</button>
+                            <button class="demo-btn" data-flex="center">Center</button>
+                        </div>
+                    </div>
+                    <div class="demo-card">
+                        <h3>CSS Grid</h3>
+                        <div class="grid-demo">
+                            <div class="grid-item">1</div>
+                            <div class="grid-item">2</div>
+                            <div class="grid-item">3</div>
+                            <div class="grid-item">4</div>
+                            <div class="grid-item">5</div>
+                            <div class="grid-item">6</div>
+                        </div>
+                        <p>Expérimentez avec différentes configurations de grille</p>
+                        <div class="demo-controls">
+                            <button class="demo-btn active" data-grid="three">3 Colonnes</button>
+                            <button class="demo-btn" data-grid="two">2 Colonnes</button>
+                            <button class="demo-btn" data-grid="four">4 Colonnes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- API Demo Section -->
+        <section id="api" class="api-demo">
+            <div class="container">
+                <div class="section-title">
+                    <h2>API CSS Expérimentales</h2>
+                    <p>Découvrez les API CSS modernes et expérimentales (nécessitent un navigateur récent)</p>
+                </div>
+                <div class="api-container">
+                    <div class="api-card">
+                        <h3>API Houdini - Properties & Values</h3>
+                        <p>Créez vos propres propriétés CSS avec typage</p>
+                        <div class="api-result" id="houdini-result">
+                            <p>Cliquez sur "Tester" pour voir cette API en action</p>
+                        </div>
+                        <button class="btn" id="houdini-btn">Tester l'API</button>
+                        <div class="api-loading" id="houdini-loading">
+                            <i class="fas fa-spinner fa-spin"></i> Chargement...
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <h3>API Animation Worklet</h3>
+                        <p>Animations performantes avec JavaScript</p>
+                        <div class="api-result" id="animation-result">
+                            <p>Cliquez sur "Tester" pour voir cette API en action</p>
+                        </div>
+                        <button class="btn" id="animation-btn">Tester l'API</button>
+                        <div class="api-loading" id="animation-loading">
+                            <i class="fas fa-spinner fa-spin"></i> Chargement...
+                        </div>
+                    </div>
+                    <div class="api-card">
+                        <h3>API Layout Worklet</h3>
+                        <p>Créez vos propres algorithmes de mise en page</p>
+                        <div class="api-result" id="layout-result">
+                            <p>Cliquez sur "Tester" pour voir cette API en action</p>
+                        </div>
+                        <button class="btn" id="layout-btn">Tester l'API</button>
+                        <div class="api-loading" id="layout-loading">
+                            <i class="fas fa-spinner fa-spin"></i> Chargement...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Ressources d'Apprentissage</h2>
+                    <p>Approfondissez vos connaissances avec ces ressources recommandées</p>
+                </div>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>Documentation MDN</h3>
+                        <p>La référence complète pour toutes les propriétés CSS avec exemples.</p>
+                        <a href="https://developer.mozilla.org/fr/docs/Web/CSS" class="btn" target="_blank">Visiter</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>CSS Tricks</h3>
+                        <p>Articles, tutoriels et guides pour maîtriser CSS.</p>
+                        <a href="https://css-tricks.com" class="btn" target="_blank">Explorer</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>Jeux d'Apprentissage</h3>
+                        <p>Apprenez CSS en jouant avec des jeux interactifs.</p>
+                        <a href="https://flexboxfroggy.com" class="btn" target="_blank">Jouer</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Tutoriels Vidéo</h3>
+                        <p>Collections de tutoriels pour tous les niveaux.</p>
+                        <a href="https://www.youtube.com/results?search_query=css+modern" class="btn" target="_blank">Regarder</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer - CORRIGÉ -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CSS Moderne</h3>
+                    <p>Votre guide complet pour apprendre et maîtriser les dernières fonctionnalités de CSS.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="#features">Fonctionnalités</a></li>
+                        <li><a href="#examples">Exemples</a></li>
+                        <li><a href="#demos">Démos</a></li>
+                        <li><a href="#api">API CSS</a></li>
+                        <li><a href="#resources">Ressources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Ressources</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://developer.mozilla.org/fr/docs/Web/CSS" target="_blank">Documentation</a></li>
+                        <li><a href="https://css-tricks.com" target="_blank">Tutoriels</a></li>
+                        <li><a href="https://caniuse.com" target="_blank">Compatibilité</a></li>
+                        <li><a href="https://web.dev/learn/css" target="_blank">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:contact@cssmoderne.fr">contact@cssmoderne.fr</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Contribuer</a></li>
+                        <li><a href="#">Signaler un bug</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 CSS Moderne. Tous droits réservés. | Conçu par Daniel_Tech</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('nav');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        // Animation des démos
+        const animationBox = document.querySelector('.animated-box');
+        const animationButtons = document.querySelectorAll('[data-animation]');
+
+        animationButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Retirer la classe active de tous les boutons
+                animationButtons.forEach(btn => btn.classList.remove('active'));
+                // Ajouter la classe active au bouton cliqué
+                button.classList.add('active');
+                
+                // Appliquer l'animation
+                const animation = button.getAttribute('data-animation');
+                animationBox.style.animation = 'none';
+                
+                setTimeout(() => {
+                    if (animation === 'pulse') {
+                        animationBox.style.animation = 'pulse 2s infinite';
+                    } else if (animation === 'rotate') {
+                        animationBox.style.animation = 'rotate 3s linear infinite';
+                    } else if (animation === 'bounce') {
+                        animationBox.style.animation = 'bounce 1s ease infinite';
+                    }
+                }, 10);
+            });
+        });
+
+        // Définir l'animation de rotation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rotate {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-20px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Flexbox Demo
+        const flexContainer = document.querySelector('.flex-demo');
+        const flexButtons = document.querySelectorAll('[data-flex]');
+
+        flexButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Retirer la classe active de tous les boutons
+                flexButtons.forEach(btn => btn.classList.remove('active'));
+                // Ajouter la classe active au bouton cliqué
+                button.classList.add('active');
+                
+                // Appliquer la disposition
+                const flexValue = button.getAttribute('data-flex');
+                
+                if (flexValue === 'row') {
+                    flexContainer.style.flexDirection = 'row';
+                    flexContainer.style.justifyContent = 'flex-start';
+                    flexContainer.style.alignItems = 'stretch';
+                } else if (flexValue === 'column') {
+                    flexContainer.style.flexDirection = 'column';
+                    flexContainer.style.justifyContent = 'flex-start';
+                    flexContainer.style.alignItems = 'stretch';
+                } else if (flexValue === 'center') {
+                    flexContainer.style.flexDirection = 'row';
+                    flexContainer.style.justifyContent = 'center';
+                    flexContainer.style.alignItems = 'center';
+                }
+            });
+        });
+
+        // Grid Demo
+        const gridContainer = document.querySelector('.grid-demo');
+        const gridButtons = document.querySelectorAll('[data-grid]');
+
+        gridButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Retirer la classe active de tous les boutons
+                gridButtons.forEach(btn => btn.classList.remove('active'));
+                // Ajouter la classe active au bouton cliqué
+                button.classList.add('active');
+                
+                // Appliquer la disposition de grille
+                const gridValue = button.getAttribute('data-grid');
+                
+                if (gridValue === 'three') {
+                    gridContainer.style.gridTemplateColumns = 'repeat(3, 1fr)';
+                } else if (gridValue === 'two') {
+                    gridContainer.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                } else if (gridValue === 'four') {
+                    gridContainer.style.gridTemplateColumns = 'repeat(4, 1fr)';
+                }
+            });
+        });
+
+        // Copier le code
+        const copyButtons = document.querySelectorAll('.copy-btn');
+
+        copyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const codeContent = button.closest('.code-example').querySelector('.code-content');
+                const textToCopy = codeContent.textContent;
+                
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    const originalIcon = button.innerHTML;
+                    button.innerHTML = '<i class="fas fa-check"></i>';
+                    
+                    setTimeout(() => {
+                        button.innerHTML = originalIcon;
+                    }, 2000);
+                });
+            });
+        });
+
+        // API Houdini Demo
+        const houdiniBtn = document.getElementById('houdini-btn');
+        const houdiniResult = document.getElementById('houdini-result');
+        const houdiniLoading = document.getElementById('houdini-loading');
+
+        houdiniBtn.addEventListener('click', () => {
+            houdiniLoading.style.display = 'block';
+            houdiniBtn.disabled = true;
+            
+            // Simulation d'une API Houdini
+            setTimeout(() => {
+                houdiniLoading.style.display = 'none';
+                houdiniBtn.disabled = false;
+                
+                if (CSS.registerProperty) {
+                    try {
+                        CSS.registerProperty({
+                            name: '--my-color',
+                            syntax: '<color>',
+                            inherits: false,
+                            initialValue: '#4361ee',
+                        });
+                        
+                        houdiniResult.innerHTML = `
+                            <p style="color: var(--success); font-weight: bold;">
+                                ✅ API Houdini supportée!
+                            </p>
+                            <p>Propriété CSS personnalisée --my-color enregistrée avec succès.</p>
+                            <div style="width: 100px; height: 100px; background: var(--my-color); margin: 10px auto; border-radius: 8px;"></div>
+                        `;
+                    } catch (e) {
+                        houdiniResult.innerHTML = `
+                            <p style="color: var(--accent); font-weight: bold;">
+                                ⚠️ API Houdini disponible mais erreur d'enregistrement
+                            </p>
+                            <p>${e.message}</p>
+                        `;
+                    }
+                } else {
+                    houdiniResult.innerHTML = `
+                        <p style="color: var(--accent); font-weight: bold;">
+                            ❌ API Houdini non supportée par votre navigateur
+                        </p>
+                        <p>Essayez avec Chrome ou Edge récent.</p>
+                    `;
+                }
+            }, 1500);
+        });
+
+        // API Animation Worklet Demo
+        const animationBtn = document.getElementById('animation-btn');
+        const animationResult = document.getElementById('animation-result');
+        const animationLoading = document.getElementById('animation-loading');
+
+        animationBtn.addEventListener('click', () => {
+            animationLoading.style.display = 'block';
+            animationBtn.disabled = true;
+            
+            // Simulation d'une API Animation Worklet
+            setTimeout(() => {
+                animationLoading.style.display = 'none';
+                animationBtn.disabled = false;
+                
+                if (CSS.animationWorklet) {
+                    animationResult.innerHTML = `
+                        <p style="color: var(--success); font-weight: bold;">
+                            ✅ API Animation Worklet supportée!
+                        </p>
+                        <p>Cette API permet des animations performantes via JavaScript.</p>
+                    `;
+                } else {
+                    animationResult.innerHTML = `
+                        <p style="color: var(--accent); font-weight: bold;">
+                            ❌ API Animation Worklet non supportée par votre navigateur
+                        </p>
+                        <p>Essayez avec Chrome 75+ ou Edge 79+.</p>
+                    `;
+                }
+            }, 1500);
+        });
+
+        // API Layout Worklet Demo
+        const layoutBtn = document.getElementById('layout-btn');
+        const layoutResult = document.getElementById('layout-result');
+        const layoutLoading = document.getElementById('layout-loading');
+
+        layoutBtn.addEventListener('click', () => {
+            layoutLoading.style.display = 'block';
+            layoutBtn.disabled = true;
+            
+            // Simulation d'une API Layout Worklet
+            setTimeout(() => {
+                layoutLoading.style.display = 'none';
+                layoutBtn.disabled = false;
+                
+                if (CSS.layoutWorklet) {
+                    layoutResult.innerHTML = `
+                        <p style="color: var(--success); font-weight: bold;">
+                            ✅ API Layout Worklet supportée!
+                        </p>
+                        <p>Cette API permet de créer des algorithmes de mise en page personnalisés.</p>
+                    `;
+                } else {
+                    layoutResult.innerHTML = `
+                        <p style="color: var(--accent); font-weight: bold;">
+                            ❌ API Layout Worklet non supportée par votre navigateur
+                        </p>
+                        <p>Essayez avec Chrome 67+ ou Edge 79+.</p>
+                    `;
+                }
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
